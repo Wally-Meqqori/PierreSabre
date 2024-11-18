@@ -14,6 +14,13 @@ public class Humain {
 		this.argent = argent;
 	}
 	
+	public String getNom() {
+		return this.nom;
+	}
+	
+	public int getArgent() {
+		return this.argent;
+	}
 	public String prendreParole() {
 		return "(" + nom + ") - ";
 	}
