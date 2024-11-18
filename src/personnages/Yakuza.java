@@ -2,7 +2,7 @@ package personnages;
 
 public class Yakuza extends Humain {
 	private String clan;
-	private int reputation = 0;
+	private int reputation = 4;
 	
 	public Yakuza(String nom, String boisson, int argent, String clan) {
 		super(nom,boisson,argent);
@@ -32,6 +32,6 @@ public class Yakuza extends Humain {
 	public void gagner(int gain) {
 		argent += gain;
 		reputation ++;
-		parler("Ce ronin pensait vraiment battre "+nom+" du "+clan+" ? Je l'ai dépouillé de ses "+gain+" sous.");
+		parler("Ce ronin pensait vraiment battre "+nom+" du clan du "+clan+" ? Je l'ai dépouillé de ses "+gain+" sous.");
 	}
 }

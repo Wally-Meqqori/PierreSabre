@@ -1,9 +1,12 @@
 package personnages;
 
 public class Humain {
+	private static final int CONNAISSANCES = 30;
 	protected String nom;
 	protected String boissonFavorite;
 	protected int argent;
+	private int indiceFinConnaissances = 0;
+	private Humain[] connaissances = new Humain[Humain.CONNAISSANCES];
 	
 	public Humain(String nom, String boissonFavorite, int argent) {
 		this.nom = nom;
@@ -25,6 +28,10 @@ public class Humain {
 	
 	public void boire() {
 		parler( "Mmmm, un bon verre de " + boissonFavorite + "! GLOUPS !");
+	}
+	
+	public final Humain[] connaissances() {
+		return this.connaissances;
 	}
 	
 	public void acheter(String bien, int prix) {
@@ -49,5 +56,39 @@ public class Humain {
 	
 	protected void gagnerArgent(int gain) {
 		this.argent += gain;
+	}
+	
+	public void repondre(Humain autreHumain) {
+		this.direBonjour();
+		this.memoriser(autreHumain);
+	}
+	
+	public void faireConnaissanceAvec(Humain autreHumain) {
+		this.direBonjour();
+		autreHumain.repondre(this);
+		this.memoriser(autreHumain);
+		
+	}
+	
+	protected void memoriser(Humain humain) {
+		final int nbConnaissancesMax = this.connaissances().length;
+		
+		this.connaissances[this.indiceFinConnaissances] = humain;
+		this.indiceFinConnaissances = (this.indiceFinConnaissances + 1) % nbConnaissancesMax;
+	}
+	
+	public void listerConnaissance() {
+		StringBuilder string = new StringBuilder();
+		string.append("Je connais beaucoup de monde dont : ");
+		for(int i = 0;i< connaissances.length;i++) {
+			if(connaissances[i] != null) {
+				string.append(connaissances[i].nom);
+				for(int j = i;j <= i;j+= 1) {
+					string.append(", ");
+				}
+			}
+		}
+		
+		this.parler(string.toString());
 	}
 }
